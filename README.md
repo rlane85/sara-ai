@@ -1,3 +1,9 @@
+# Sara AI
+
+working out an idea for an AI task, calendar, to-do list overall helpful assistant person. gotta pay for female voice so we're stucked with a gruff sounding sara helper.
+[Alan Ai](https://alan.app/docs)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
