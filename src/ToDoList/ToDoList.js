@@ -6,7 +6,7 @@ const ToDoList = ({ task }) => {
     useEffect(() => {
         console.log(task, "task")
         addTask(task)
-    }, [task])
+    }, [task]) /* eslint-disable-line */
   const [toDoList, setToDoList] = useState(data);
   const addTask = (userInput) => {
     let copy = [...toDoList];

@@ -1,4 +1,5 @@
 import "./App.css";
+import logo from './sara-ai02.gif'; 
 import { useEffect, useState, useRef } from "react";
 //mock data
 
@@ -10,12 +11,12 @@ function App() {
   const alanBtnRef = useRef({}).current;
   const [aiAddedTask, setAiAddedTask] = useState("");
   const [recognized, setRecognized] = useState("");
-  
+  const [parsed, setParsed] = useState("");
+  const [text, setText] = useState("");
   const [conciousness, setConciousness] = useState("");
 
-
   useEffect(() => {
-    var greetingWasSaid = false;
+    // var greetingWasSaid = false;
     alanBtnRef.btnInstance = alanBtn({
       key: process.env.REACT_APP_ALANAI_KEY,
       showOverlayOnMicPermissionPrompt: true,
@@ -45,6 +46,12 @@ function App() {
         switch (name) {
           case "recognized":
             setRecognized(text);
+            break;
+          case "parsed":
+            setParsed(text);
+            break;
+          case "text":
+            setText(text);
             break;
           default:
             setRecognized("");
@@ -78,9 +85,11 @@ function App() {
 
   return (
     <div className="App">
-      <ToDoList task={aiAddedTask}
-      />
-      <p>{recognized}</p>
+      <img src={logo} alt="Logo" className="App-logo" />
+      <ToDoList task={aiAddedTask} />
+      <p>Your recognized text: {recognized}</p>
+      <p>Your parsed text: {parsed}</p>
+      <p>Sara reply: {text}</p>
       {Buttons}
       <h1>{aiAddedTask}</h1>
       <h1>{conciousness}</h1>

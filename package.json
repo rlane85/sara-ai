@@ -1,5 +1,6 @@
 {
   "name": "sara-ai",
+  "homepage": "https://st.mc-lane.com/sara-ai",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
