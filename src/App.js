@@ -1,5 +1,6 @@
 import "./App.css";
-import logo from './sara-ai02.gif'; 
+import withSplashScreen from './withSplashScreen';
+
 import { useEffect, useState, useRef } from "react";
 //mock data
 
@@ -85,7 +86,7 @@ function App() {
 
   return (
     <div className="App">
-      <img src={logo} alt="Logo" className="App-logo" />
+      
       <ToDoList task={aiAddedTask} />
       <p>Your recognized text: {recognized}</p>
       <p>Your parsed text: {parsed}</p>
@@ -97,4 +98,4 @@ function App() {
   );
 }
 
-export default App;
+export default withSplashScreen(App, 3000);
