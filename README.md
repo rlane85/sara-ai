@@ -2,6 +2,7 @@
 
 working out an idea for an AI task, calendar, to-do list overall helpful assistant person. gotta pay for female voice so we're stucked with a gruff sounding sara helper.
 [Alan Ai](https://alan.app/docs)
+[Chat UI Kit React](https://github.com/chatscope/chat-ui-kit-react)
 
 
 # Getting Started with Create React App
