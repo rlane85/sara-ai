@@ -5,7 +5,7 @@ import logo from './sara-ai02.gif';
 function LoadingMessage(timeout) {
   return (
     <div className="splash-screen">
-      <img src={logo} alt="Logo" className="App-logo" />
+      <img src={logo} alt="splash" className="splash-logo" />
       <div className="loading-dot">.</div>
     </div>
   );

@@ -1,11 +1,16 @@
-import "./App.css";
-import withSplashScreen from './withSplashScreen';
-
+//react imports
 import { useEffect, useState, useRef } from "react";
-//mock data
+
+//styles
+import "./App.css";
+import withSplashScreen from "./withSplashScreen";
+import CssBaseline from "@mui/material/CssBaseline";
 
 //components
+import { ChatBox } from "./ChatBox";
 import { ToDoList } from "./ToDoList";
+
+import { ResponsiveDrawer } from "./ResponsiveDrawer";
 import alanBtn from "@alan-ai/alan-sdk-web";
 
 function App() {
@@ -39,11 +44,8 @@ function App() {
             console.log("unknown command");
         }
       },
-      onButtonState: async function (status) {
-        console.log(status);
-      },
+
       onEvent: function ({ name, text, final }) {
-        console.log(name);
         switch (name) {
           case "recognized":
             setRecognized(text);
@@ -85,17 +87,22 @@ function App() {
   );
 
   return (
-    <div className="App">
-      
-      <ToDoList task={aiAddedTask} />
-      <p>Your recognized text: {recognized}</p>
-      <p>Your parsed text: {parsed}</p>
-      <p>Sara reply: {text}</p>
-      {Buttons}
-      <h1>{aiAddedTask}</h1>
-      <h1>{conciousness}</h1>
-    </div>
+    <>
+      <CssBaseline />
+      <div className="App">
+        <ResponsiveDrawer drawerContent={<ToDoList task={aiAddedTask}/>} >
+
+          <p>Your recognized text: {recognized}</p>
+          <p>Your parsed text: {parsed}</p>
+          <p>Sara reply: {text}</p>``
+          <ChatBox />
+        </ResponsiveDrawer>
+        {Buttons}
+        <h1>{aiAddedTask}</h1>
+        <h1>{conciousness}</h1>
+      </div>
+    </>
   );
 }
 
-export default withSplashScreen(App, 3000);
+export default withSplashScreen(App, 1000);
