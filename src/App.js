@@ -1,25 +1,32 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 //mock data
-import data from "./data.json";
+
 //components
-import Header from "./Header";
-import ToDoList from "./ToDoList";
-import ToDoForm from "./ToDoForm";
+import { ToDoList } from "./ToDoList";
 import alanBtn from "@alan-ai/alan-sdk-web";
+
 function App() {
-  const [item, setItem] = useState("");
+  const alanBtnRef = useRef({}).current;
+  const [aiAddedTask, setAiAddedTask] = useState("");
+  const [recognized, setRecognized] = useState("");
+  
+  const [conciousness, setConciousness] = useState("");
+
+
   useEffect(() => {
-    alanBtn({
+    var greetingWasSaid = false;
+    alanBtnRef.btnInstance = alanBtn({
       key: process.env.REACT_APP_ALANAI_KEY,
+      showOverlayOnMicPermissionPrompt: true,
       onCommand: ({ command, item }) => {
         console.log(command);
         console.log(item);
 
         switch (command) {
           case "addItem":
-            setItem(item);
-            addTask(item);
+            setAiAddedTask(item);
+            // addTask(item);
 
             break;
           case "addConciousness":
@@ -30,53 +37,52 @@ function App() {
             console.log("unknown command");
         }
       },
+      onButtonState: async function (status) {
+        console.log(status);
+      },
+      onEvent: function ({ name, text, final }) {
+        console.log(name);
+        switch (name) {
+          case "recognized":
+            setRecognized(text);
+            break;
+          default:
+            setRecognized("");
+        }
+      },
     });
-  }, [item]);  /* eslint-disable-line */
-
-  const [toDoList, setToDoList] = useState(data);
-  const [conciousness, setConciousness] = useState("");
-
-  const handleToggle = (id) => {
-    let mapped = toDoList.map((task) => {
-      return task.id === Number(id)
-        ? { ...task, complete: !task.complete }
-        : { ...task };
-    });
-    setToDoList(mapped);
-  };
-
-  const handleFilter = () => {
-    let filtered = toDoList.filter((task) => {
-      return !task.complete;
-    });
-    setToDoList(filtered);
-  };
-
-  const addTask = (userInput) => {
-    let copy = [...toDoList];
-    copy = [
-      ...copy,
-      { id: toDoList.length + 1, task: userInput, complete: false },
-    ];
-    setToDoList(copy);
-  };
+  }, [aiAddedTask]); /* eslint-disable-line */
 
   const addConciousness = (userInput) => {
     setConciousness(userInput);
   };
 
+  const Buttons = (
+    <div>
+      <button
+        onClick={() => {
+          alanBtnRef.btnInstance.activate();
+        }}
+      >
+        activate the Alan AI button
+      </button>
+      <button
+        onClick={() => {
+          alanBtnRef.btnInstance.deactivate();
+        }}
+      >
+        deactivate the Alan AI button
+      </button>
+    </div>
+  );
+
   return (
     <div className="App">
-      <Header />
-      {
-        <ToDoList
-          toDoList={toDoList}
-          handleToggle={handleToggle}
-          handleFilter={handleFilter}
-        />
-      }
-      <ToDoForm addTask={addTask} />
-      <h1>{item}</h1>
+      <ToDoList task={aiAddedTask}
+      />
+      <p>{recognized}</p>
+      {Buttons}
+      <h1>{aiAddedTask}</h1>
       <h1>{conciousness}</h1>
     </div>
   );
