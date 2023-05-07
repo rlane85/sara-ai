@@ -1,6 +1,10 @@
 //react imports
 import { useEffect, useState, useRef } from "react";
 
+//react-helmet
+
+import { SEO } from "./icons/SEO"
+
 //styles
 import "./App.css";
 import withSplashScreen from "./withSplashScreen";
@@ -65,6 +69,7 @@ function App() {
   return (
     <>
       <CssBaseline />
+      <SEO />
       <div className="App">
         <ResponsiveDrawer drawerContent={<ToDoList task={aiAddedTask} />}>
           <ChatBox
