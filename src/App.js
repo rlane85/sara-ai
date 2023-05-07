@@ -16,19 +16,23 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 function App() {
   const alanBtnRef = useRef({}).current;
   const [aiAddedTask, setAiAddedTask] = useState("");
-  const [recognized, setRecognized] = useState("");
-  const [parsed, setParsed] = useState("");
-  const [text, setText] = useState("");
-  const [conciousness, setConciousness] = useState("");
+  const [parsed, setParsed] = useState({
+    welcomeMsg: "Default Reply",
+  });
+  const [saraReply, setSaraReply] = useState({
+    welcomeMsg: "Welcome",
+  });
 
   useEffect(() => {
+    // console.log(saraReply);
     // var greetingWasSaid = false;
     alanBtnRef.btnInstance = alanBtn({
       key: process.env.REACT_APP_ALANAI_KEY,
       showOverlayOnMicPermissionPrompt: true,
       onCommand: ({ command, item }) => {
-        console.log(command);
-        console.log(item);
+        // console.log(command);
+        // console.log(item);
+
 
         switch (command) {
           case "addItem":
@@ -36,70 +40,46 @@ function App() {
             // addTask(item);
 
             break;
-          case "addConciousness":
-            addConciousness(item);
 
-            break;
           default:
             console.log("unknown command");
         }
       },
 
-      onEvent: function ({ name, text, final }) {
+      onEvent: function (e) {
+        const { name, text, final } = e;
+
         switch (name) {
-          case "recognized":
-            setRecognized(text);
-            break;
           case "parsed":
-            setParsed(text);
+            console.log(e);
+            const userResponseObject = {[e.reqId]: text}
+            console.log(userResponseObject)
+            setParsed(userResponseObject);
             break;
           case "text":
-            setText(text);
+            // console.log(e);
+            const saraResponseObject = { [e.ctx.reqId]: text };
+            // console.log(saraResponseObject);
+
+            setSaraReply(saraResponseObject);
             break;
-          default:
-            setRecognized("");
         }
       },
     });
-  }, [aiAddedTask]); /* eslint-disable-line */
+  }, [aiAddedTask, saraReply, parsed, alanBtnRef]);
 
-  const addConciousness = (userInput) => {
-    setConciousness(userInput);
-  };
 
-  const Buttons = (
-    <div>
-      <button
-        onClick={() => {
-          alanBtnRef.btnInstance.activate();
-        }}
-      >
-        activate the Alan AI button
-      </button>
-      <button
-        onClick={() => {
-          alanBtnRef.btnInstance.deactivate();
-        }}
-      >
-        deactivate the Alan AI button
-      </button>
-    </div>
-  );
-
+  // console.log(parsed, "parsed")
   return (
     <>
       <CssBaseline />
       <div className="App">
-        <ResponsiveDrawer drawerContent={<ToDoList task={aiAddedTask}/>} >
-
-          <p>Your recognized text: {recognized}</p>
-          <p>Your parsed text: {parsed}</p>
-          <p>Sara reply: {text}</p>``
-          <ChatBox />
+        <ResponsiveDrawer drawerContent={<ToDoList task={aiAddedTask} />}>
+          <ChatBox saraReply={saraReply} userInput={parsed} />
         </ResponsiveDrawer>
-        {Buttons}
+
         <h1>{aiAddedTask}</h1>
-        <h1>{conciousness}</h1>
+
       </div>
     </>
   );

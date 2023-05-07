@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { ToDo, Header, ToDoForm } from "./";
 import data from "./data.json";
 const ToDoList = ({ task }) => {
-    // console.log(task, "task")
-    useEffect(() => {
-        console.log(task, "task")
-        addTask(task)
-    }, [task]) 
+  // console.log(task, "task")
+  useEffect(() => {
+
+    addTask(task);
+  }, [task]); /* eslint-disable-line */
   const [toDoList, setToDoList] = useState(data);
   const addTask = (userInput) => {
     let copy = [...toDoList];
