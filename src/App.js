@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 
 //styles
-import "./App.css";
+
 import withSplashScreen from "./withSplashScreen";
 import CssBaseline from "@mui/material/CssBaseline";
 
