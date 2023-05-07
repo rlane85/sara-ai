@@ -53,7 +53,7 @@ const ResponsiveDrawer = ({ children, drawerContent }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Sara AI
           </Typography>
         </Toolbar>
       </AppBar>
