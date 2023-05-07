@@ -17,28 +17,25 @@ function App() {
   const alanBtnRef = useRef({}).current;
   const [aiAddedTask, setAiAddedTask] = useState("");
   const [parsed, setParsed] = useState({
-    welcomeMsg: "Default Reply",
+    welcomeMsg: "This line represents a user message sent to Sara",
   });
   const [saraReply, setSaraReply] = useState({
-    welcomeMsg: "Welcome",
+    welcomeMsg: "I will eventually store and display your chat history here. This line reprensents one of Sara's replies",
   });
+  const [textMessage, setTextMessage] = useState("");
+  const sendTextMessage = () => {
+    alanBtnRef.btnInstance.sendText(textMessage);
+    setTextMessage("")
+  }
 
   useEffect(() => {
-    // console.log(saraReply);
-    // var greetingWasSaid = false;
     alanBtnRef.btnInstance = alanBtn({
       key: process.env.REACT_APP_ALANAI_KEY,
       showOverlayOnMicPermissionPrompt: true,
       onCommand: ({ command, item }) => {
-        // console.log(command);
-        // console.log(item);
-
-
         switch (command) {
           case "addItem":
             setAiAddedTask(item);
-            // addTask(item);
-
             break;
 
           default:
@@ -47,39 +44,37 @@ function App() {
       },
 
       onEvent: function (e) {
-        const { name, text, final } = e;
+        const { name, text } = e;
 
         switch (name) {
           case "parsed":
-            console.log(e);
-            const userResponseObject = {[e.reqId]: text}
-            console.log(userResponseObject)
+            const userResponseObject = { [e.reqId]: text };
             setParsed(userResponseObject);
             break;
           case "text":
-            // console.log(e);
             const saraResponseObject = { [e.ctx.reqId]: text };
-            // console.log(saraResponseObject);
-
+            console.log(saraResponseObject)
             setSaraReply(saraResponseObject);
             break;
+          default:
         }
       },
     });
   }, [aiAddedTask, saraReply, parsed, alanBtnRef]);
 
-
-  // console.log(parsed, "parsed")
   return (
     <>
       <CssBaseline />
       <div className="App">
         <ResponsiveDrawer drawerContent={<ToDoList task={aiAddedTask} />}>
-          <ChatBox saraReply={saraReply} userInput={parsed} />
+          <ChatBox
+            saraReply={saraReply}
+            userInput={parsed}
+            textMessage={textMessage}
+            setTextMessage={setTextMessage}
+            sendTextMessage={sendTextMessage}
+          />
         </ResponsiveDrawer>
-
-        <h1>{aiAddedTask}</h1>
-
       </div>
     </>
   );
