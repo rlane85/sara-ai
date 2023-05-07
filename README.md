@@ -4,9 +4,6 @@ working out an idea for an AI task, calendar, to-do list overall helpful assista
 
 [Alan Ai](https://alan.app/docs)
 
-[Chat UI Kit React](https://github.com/chatscope/chat-ui-kit-react)
-
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
