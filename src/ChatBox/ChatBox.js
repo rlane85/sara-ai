@@ -32,25 +32,28 @@ const ChatBox = ({
 
   return (
     <Container>
-      <Grid container component={Paper} sx={{ height: "70vh" }}>
-        {Object.keys(aiHistory).map((aiMessageKey) => {
-          const aiMessage = aiHistory[aiMessageKey];
-          const attachedUserMessage = userHistory[aiMessageKey];
-          return (
-            <Grid key={aiMessageKey+"item"} item xs={12}>
-              <Typography
-                align={"left"}
-                key={aiMessageKey + "userMessage"}
-                color="green"
-              >
-                {attachedUserMessage}
-              </Typography>
-              <Typography align={"right"} key={aiMessageKey} color="red">
-                {aiMessage}
-              </Typography>
-            </Grid>
-          );
-        })}
+      <Grid container component={Paper} sx={{ height: "80vh" }}>
+        <Grid container alignItems="flex-start">
+          {Object.keys(aiHistory).map((aiMessageKey) => {
+            const aiMessage = aiHistory[aiMessageKey];
+            const attachedUserMessage = userHistory[aiMessageKey];
+            return (
+              <Grid key={aiMessageKey + "item"} item xs={12}>
+                <Typography
+                  align={"left"}
+                  key={aiMessageKey + "userMessage"}
+                  color="green"
+                >
+                  {attachedUserMessage}
+                </Typography>
+                <Typography align={"right"} key={aiMessageKey} color="red">
+                  {aiMessage}
+                </Typography>
+
+              </Grid>
+            );
+          })}
+        </Grid>
       </Grid>
       <Textfield
         textMessage={textMessage}
