@@ -1,13 +1,41 @@
+//react imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+//style
+import './index.css';
+
+//components
+import App from './App';
+import { Login } from './User/Login'
+import { Test } from './User/Test'
+
+//router
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "login",
+    element: <Login />
+  },
+  {
+    path: "test",
+    element: <Test />
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
