@@ -13,7 +13,7 @@ export const Login = () => {
       username: userText,
       password: passText
     }
-    console.log(url)
+
     fetch(url, {
       method: 'POST',
       headers: {
