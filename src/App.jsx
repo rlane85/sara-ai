@@ -9,6 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 //components
 import { ChatBox } from "./ChatBox";
 import { ToDoList } from "./ToDoList";
+import { Version } from "./Version";
 
 import { ResponsiveDrawer } from "./ResponsiveDrawer";
 import alanBtn from "@alan-ai/alan-sdk-web";

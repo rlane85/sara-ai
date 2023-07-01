@@ -11,7 +11,7 @@ import './index.css';
 //components
 import App from './App';
 import { Login } from './User/Login'
-import { Test } from './User/Test'
+import { Version } from './Version'
 
 //router
 import {
@@ -19,7 +19,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: "/",
     element: <ResponsiveDrawer />,
@@ -30,11 +30,13 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
-    path: "test",
-    element: <Test />
-  },
-
-]);
+    path: "version",
+    element: <Version />
+  }
+]
+const router = createBrowserRouter(routes, {
+  basename: "/sara-ai"
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

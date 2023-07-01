@@ -69,6 +69,11 @@ const ResponsiveDrawer = ({ children, drawerContent }) => {
             <Link to="/login">
               <AccountCircleIcon />
             </Link>
+            <Link to="/version">
+              <Typography>
+                Version
+              </Typography>
+            </Link>
           </IconButton>
         </Toolbar>
       </AppBar>
