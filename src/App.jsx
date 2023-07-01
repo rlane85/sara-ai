@@ -7,9 +7,7 @@ import withSplashScreen from "./withSplashScreen";
 import CssBaseline from "@mui/material/CssBaseline";
 
 //components
-import { ChatBox } from "./ChatBox";
-import { ToDoList } from "./ToDoList";
-import { Version } from "./routes/Version";
+import { ChatBox } from "./routes/ChatBox";
 
 import alanBtn from "@alan-ai/alan-sdk-web";
 
