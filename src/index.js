@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+import ErrorPage from './ErrorPage';
 
 //style
 import './index.css';
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "login",
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
     path: "test",
     element: <Test />
   },
-  
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
