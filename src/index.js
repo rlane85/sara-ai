@@ -2,16 +2,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+
 import ErrorPage from './ErrorPage';
-import { ResponsiveDrawer } from "./ResponsiveDrawer";
+import { ResponsiveDrawer } from "./routes/Root";
 
 //style
 import './index.css';
 
 //components
 import App from './App';
-import { Login } from './User/Login'
-import { Version } from './Version'
+import { Login } from './routes/Login'
+import { Version } from './routes/Version'
 
 //router
 import {
@@ -24,15 +25,24 @@ const routes = [
     path: "/",
     element: <ResponsiveDrawer />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "login",
+            element: <Login />
+          },
+          {
+            path: "version",
+            element: <Version />
+          }
+        ]
+    }
+
+    ]
   },
-  {
-    path: "login",
-    element: <Login />
-  },
-  {
-    path: "version",
-    element: <Version />
-  }
+
 ]
 const router = createBrowserRouter(routes, {
   basename: "/sara-ai"

@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Typography, Paper } from "@mui/material";
 
 //components
-import { ResponsiveDrawer } from "./ResponsiveDrawer";
-import { ToDoList } from "./ToDoList";
 export const Version = () => {
   const [version, setVersion] = useState("");
   useEffect(() => {
