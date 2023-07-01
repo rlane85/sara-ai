@@ -1,28 +1,25 @@
 //react imports
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import reportWebVitals from './reportWebVitals'
 
-import ErrorPage from './ErrorPage';
-import { ResponsiveDrawer } from "./routes/Root";
+import ErrorPage from './ErrorPage'
+import { ResponsiveDrawer } from './routes/Root'
 
 //style
-import './index.css';
+import './index.css'
 
 //components
-import App from './App';
-import { Login } from './routes/Login'
+import App from './App'
+import { Login, action as loginAction } from './routes/Login'
 import { Version } from './routes/Version'
 
 //router
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     element: <ResponsiveDrawer />,
     errorElement: <ErrorPage />,
     children: [
@@ -30,32 +27,35 @@ const routes = [
         errorElement: <ErrorPage />,
         children: [
           {
-            path: "login",
-            element: <Login />
+            path: 'login',
+            element: <Login />,
+            action: loginAction,
           },
           {
-            path: "version",
+            path: 'version',
             element: <Version />
+          },
+          {
+            index: true,
+            element: <App />
           }
         ]
-    }
-
+      }
     ]
-  },
-
+  }
 ]
 const router = createBrowserRouter(routes, {
-  basename: "/sara-ai"
-});
+  basename: '/sara-ai'
+})
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()
