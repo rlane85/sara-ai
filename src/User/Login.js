@@ -8,7 +8,8 @@ import SendIcon from '@mui/icons-material/Send'
 export const Login = () => {
   const submit = () => {
     const uri = `/api/auth/signin`
-    const url = process.env.REACT_APP_SERVER_ROOT + uri
+    const url = process.env.REACT_APP_SERVER_ROOT + uri;
+    console.log(url);
     const reqBody = {
       username: userText,
       password: passText
