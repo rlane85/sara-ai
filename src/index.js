@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import ErrorPage from './ErrorPage';
+import { ResponsiveDrawer } from "./ResponsiveDrawer";
 
 //style
 import './index.css';
@@ -21,7 +22,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <ResponsiveDrawer />,
     errorElement: <ErrorPage />,
   },
   {

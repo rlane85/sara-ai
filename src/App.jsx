@@ -1,7 +1,6 @@
 //react imports
 import { useEffect, useState, useRef } from "react";
 
-
 //styles
 
 import withSplashScreen from "./withSplashScreen";
