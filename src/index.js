@@ -12,6 +12,7 @@ import './index.css'
 //components
 import App from './App'
 import { Login, action as loginAction } from './routes/Login'
+import { Roles, loader as rolesLoader } from './routes/Roles'
 import { Version } from './routes/Version'
 
 //router
@@ -30,6 +31,11 @@ const routes = [
             path: 'login',
             element: <Login />,
             action: loginAction,
+          },
+          {
+            path: 'roles',
+            element: <Roles />,
+            loader: rolesLoader,
           },
           {
             path: 'version',
