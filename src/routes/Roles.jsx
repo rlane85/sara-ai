@@ -17,8 +17,8 @@ import { roles } from "./controllers/roles";
 
 export async function loader({ request, params }) {
   const response = await roles();
-  //console.log(response);
-  if (response.msg) return response.msg;
+  // console.log(response);
+  if (response) return response;
   else return null;
 }
 
@@ -27,7 +27,15 @@ export const Roles = () => {
 
   return (
     <Paper>
-      <Typography>Response: {loaderData ? loaderData : "none yet"}</Typography>
+      <Typography>user: {loaderData ? loaderData.username : ""}</Typography>
+      <Typography>
+        roles:{" "}
+        {loaderData
+          ? loaderData.roles.map((role, i) => {
+              return role + ", ";
+            })
+          : ""}
+      </Typography>
     </Paper>
   );
 };
