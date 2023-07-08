@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 //material components
 import { Paper, Typography } from "@mui/material";
 
-
+//fetcher
 import { roles } from "./controllers/roles";
 
 export async function loader({ request, params }) {
