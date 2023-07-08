@@ -6,7 +6,6 @@ export async function login(user, pass) {
     username: user,
     password: pass,
   };
-  console.log(url);
 
   return fetch(url, {
     method: "POST",
@@ -18,7 +17,6 @@ export async function login(user, pass) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((e) => {
