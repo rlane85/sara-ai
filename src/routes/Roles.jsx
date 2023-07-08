@@ -2,16 +2,8 @@
 import { useLoaderData } from "react-router-dom";
 
 //material components
-import {
-  InputBase,
-  IconButton,
-  Paper,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
-//material icons
-import SendIcon from "@mui/icons-material/Send";
 
 import { roles } from "./controllers/roles";
 
