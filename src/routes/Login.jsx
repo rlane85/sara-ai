@@ -43,7 +43,7 @@ export const Login = () => {
           sx={{ ml: 1, flex: 1 }}
           inputProps={{ 'aria-label': 'password' }}
           placeholder='password'
-          type='text'
+          type='password'
           name='pass'
         />
 
