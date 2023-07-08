@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 import { Paper, Typography } from "@mui/material";
 
 //fetcher
-import { roles } from "./controllers/roles";
+import { roles } from "../controllers/roles";
 
 export async function loader({ request, params }) {
   const response = await roles();
