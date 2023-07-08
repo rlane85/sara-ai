@@ -31,6 +31,7 @@ export const Login = () => {
 
   return (
     <Form method='post' id='login'>
+      <Typography variant="h1">Login</Typography>
       <Paper sx={{ p: '2px 4px', display: 'flex', alignItems: 'center' }}>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
