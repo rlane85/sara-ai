@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [ 
         {
-            "name": "chrome",
+            "name": "Debug in Chrome",
             "type": "chrome",
             "request": "launch",
             "url": "http://localhost:3000/sara-ai",     // create-react-app's default port 3000
