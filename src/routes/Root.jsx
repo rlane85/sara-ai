@@ -59,32 +59,36 @@ const ResponsiveDrawer = () => {
           >
             <MenuIcon />
           </IconButton>
+
           <Link to={"/"}>
             <Typography variant="h6" noWrap component="div">
               Sara AI
             </Typography>
           </Link>
-
-          <IconButton
-            color="inherit"
-            aria-label="login"
-            edge="start"
-            onClick={null}
-            sx={{ marginLeft: "auto" }}
-          >
+          <Box sx={{ marginLeft: "auto", display: "flex" }}>
             <Link to="/login">
-              <AccountCircleIcon />
+              <Typography>Login</Typography>
             </Link>
-          </IconButton>
-          <Link to="/signup">
-            <Typography>Sign Up</Typography>
-          </Link>
-          <Link to="/signout">
-            <Typography>Sign Out</Typography>
-          </Link>
-          <Link to="/roles">
-            <Typography>Roles</Typography>
-          </Link>
+
+            <Link to="/signup">
+              <Typography>Sign Up</Typography>
+            </Link>
+
+            <Link to="/signout">
+              <Typography>Sign Out</Typography>
+            </Link>
+
+            <Link to="/roles">
+              <Typography>Roles</Typography>
+            </Link>
+            <Link to="/createactivitylist">
+              <Typography>Create Activity List</Typography>
+            </Link>
+            <Link to="/deleteactivitylist">
+              <Typography>Delete Activity List</Typography>
+            </Link>
+          </Box>
+
           <IconButton
             color="inherit"
             aria-label="version"

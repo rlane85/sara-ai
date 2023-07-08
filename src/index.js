@@ -13,8 +13,10 @@ import "./index.css";
 import App from "./App";
 import { Login, action as loginAction } from "./routes/Login";
 import { Signup, action as signupAction } from "./routes/Signup";
-import { Roles, loader as rolesLoader } from "./routes/Roles";
-import { Signout, loader as signoutLoader } from "./routes/Signout";
+import { Roles, loader as rolesLoader } from "./routes/User/Roles";
+import { CreateActivityList, loader as createActivityListLoader } from "./routes/User/CreateActivityList";
+import { DeleteActivityList, loader as deleteActivityListLoader } from "./routes/User/DeleteActivityList";
+import { Signout, loader as signoutLoader } from "./routes/User/Signout";
 import { Version } from "./routes/Version";
 
 //router
@@ -43,6 +45,16 @@ const routes = [
             path: "roles",
             element: <Roles />,
             loader: rolesLoader,
+          },
+          {
+            path: "createactivitylist",
+            element: <CreateActivityList />,
+            loader: createActivityListLoader,
+          },
+          {
+            path: "deleteactivitylist",
+            element: <DeleteActivityList />,
+            loader: deleteActivityListLoader,
           },
           {
             path: "signout",
