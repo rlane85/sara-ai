@@ -12,6 +12,7 @@ import './index.css'
 //components
 import App from './App'
 import { Login, action as loginAction } from './routes/Login'
+import { Signup, action as signupAction } from './routes/Signup'
 import { Roles, loader as rolesLoader } from './routes/Roles'
 import { Version } from './routes/Version'
 
@@ -27,6 +28,11 @@ const routes = [
       {
         errorElement: <ErrorPage />,
         children: [
+          {
+            path: 'signup',
+            element: <Signup />,
+            action: signupAction,
+          },
           {
             path: 'login',
             element: <Login />,

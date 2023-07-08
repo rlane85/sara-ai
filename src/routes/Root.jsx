@@ -64,6 +64,7 @@ const ResponsiveDrawer = () => {
               Sara AI
             </Typography>
           </Link>
+
           <IconButton
             color="inherit"
             aria-label="login"
@@ -75,6 +76,9 @@ const ResponsiveDrawer = () => {
               <AccountCircleIcon />
             </Link>
           </IconButton>
+          <Link to="/signup">
+            <Typography>Sign Up</Typography>
+          </Link>
           <Link to="/roles">
             <Typography>Roles</Typography>
           </Link>
