@@ -1,27 +1,28 @@
 //react imports
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import reportWebVitals from './reportWebVitals'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
 
-import ErrorPage from './ErrorPage'
-import { ResponsiveDrawer } from './routes/Root'
+import ErrorPage from "./ErrorPage";
+import { ResponsiveDrawer } from "./routes/Root";
 
 //style
-import './index.css'
+import "./index.css";
 
 //components
-import App from './App'
-import { Login, action as loginAction } from './routes/Login'
-import { Signup, action as signupAction } from './routes/Signup'
-import { Roles, loader as rolesLoader } from './routes/Roles'
-import { Version } from './routes/Version'
+import App from "./App";
+import { Login, action as loginAction } from "./routes/Login";
+import { Signup, action as signupAction } from "./routes/Signup";
+import { Roles, loader as rolesLoader } from "./routes/Roles";
+import { Signout, loader as signoutLoader } from "./routes/Signout";
+import { Version } from "./routes/Version";
 
 //router
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     element: <ResponsiveDrawer />,
     errorElement: <ErrorPage />,
     children: [
@@ -29,45 +30,50 @@ const routes = [
         errorElement: <ErrorPage />,
         children: [
           {
-            path: 'signup',
+            path: "signup",
             element: <Signup />,
             action: signupAction,
           },
           {
-            path: 'login',
+            path: "login",
             element: <Login />,
             action: loginAction,
           },
           {
-            path: 'roles',
+            path: "roles",
             element: <Roles />,
             loader: rolesLoader,
           },
           {
-            path: 'version',
-            element: <Version />
+            path: "signout",
+            element: <Signout />,
+            loader: signoutLoader,
+          },
+          {
+            path: "version",
+            element: <Version />,
           },
           {
             index: true,
-            element: <App />
-          }
-        ]
-      }
-    ]
-  }
-]
+            element: <App />,
+          },
+        ],
+      },
+    ],
+  },
+];
 const router = createBrowserRouter(routes, {
-  basename: '/sara-ai'
-})
+  basename: "/sara-ai",
+});
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-)
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+reportWebVitals();

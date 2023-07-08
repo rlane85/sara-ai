@@ -79,6 +79,9 @@ const ResponsiveDrawer = () => {
           <Link to="/signup">
             <Typography>Sign Up</Typography>
           </Link>
+          <Link to="/signout">
+            <Typography>Sign Out</Typography>
+          </Link>
           <Link to="/roles">
             <Typography>Roles</Typography>
           </Link>
