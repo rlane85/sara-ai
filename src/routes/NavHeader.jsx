@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 
 //components
-import { ToDoList } from "../ToDoList";
 
 //mui components
 import {
