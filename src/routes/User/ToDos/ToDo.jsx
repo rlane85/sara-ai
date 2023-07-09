@@ -154,7 +154,6 @@ export const ToDo = ({
           setToDoPriority(event.target.value);
         }}
         onChangeCommitted={(event) => {
-          console.log({ priority: toDoPriority });
           handleSubmitModify(description, {
             priority: toDoPriority,
             status,
