@@ -12,6 +12,8 @@ import {
   IconButton,
 } from "@mui/material";
 
+import { useTheme } from "@mui/material/styles";
+
 //material icons
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
@@ -26,8 +28,10 @@ export const ToDo = ({
   updatedAt,
   activitylistId,
 }) => {
+  const theme = useTheme();
+
   const [editing, setEditing] = useState(false);
-  const [toDo, setToDo] = useState(description);
+  const [toDoDescription, setToDoDescription] = useState(description);
   const [completed, setCompleted] = useState(false);
 
   const Icon = editing ? (
@@ -40,6 +44,12 @@ export const ToDo = ({
     textDecoration: completed ? "line-through" : "none",
     input: { cursor: editing ? "text" : "default" },
   };
+
+  const statusMap = {
+    todo: "warning",
+    inprogress: "success",
+    complete: "secondary"
+  }
 
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
@@ -54,16 +64,20 @@ export const ToDo = ({
         </IconButton>
         <TextField
           sx={{ ...textFieldSx }}
+          focused={!editing}
+          color={statusMap[status]}
           variant="standard"
           id="description"
-          value={toDo}
+          value={toDoDescription}
           onChange={(event) => {
-            if (editing) setToDo(event.target.value);
+            if (editing) setToDoDescription(event.target.value);
             else return null;
           }}
           onClick={() => setCompleted(!completed)}
         />
       </Box>
+      {status}
+      {priority}
     </Box>
   );
 };
