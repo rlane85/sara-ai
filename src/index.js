@@ -3,29 +3,27 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 
-import ErrorPage from "./ErrorPage";
-import { ResponsiveDrawer } from "./routes/Root";
-
 //style
 import "./index.css";
 
 //components
 import App from "./App";
+import ErrorPage from "./ErrorPage";
+import { ResponsiveDrawer } from "./routes/NavHeader";
+
+//route components
 import { Login, action as loginAction } from "./routes/Login";
 import { Signup, action as signupAction } from "./routes/Signup";
 import { Roles, loader as rolesLoader } from "./routes/User/Roles";
-
 import { Signout, loader as signoutLoader } from "./routes/User/Signout";
 import {
   CreateToDo,
   action as createToDoAction,
 } from "./routes/User/ToDos/CreateToDo";
-
 import {
   ListToDos,
   loader as listToDosLoader,
 } from "./routes/User/ToDos/ListToDos";
-
 import { Version } from "./routes/Version";
 
 //router
