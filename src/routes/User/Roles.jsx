@@ -17,7 +17,7 @@ export async function loader({ request, params }) {
 export const Roles = () => {
   const loaderData = useLoaderData();
 
-  return (
+  return loaderData.msg ? loaderData.msg : (
     <Paper>
       <Typography>user: {loaderData ? loaderData.username : ""}</Typography>
       <Typography>
