@@ -1,3 +1,6 @@
+//react imports
+import { useState, useEffect } from "react";
+
 //router
 import { useLoaderData } from "react-router-dom";
 
@@ -18,17 +21,22 @@ export async function loader({ request, params }) {
 }
 
 export const ListToDos = () => {
-  const loaderData = useLoaderData();
 
+  const loaderData = useLoaderData();
+  const [toDoList, setToDoList] = useState(loaderData.list);
+
+  useEffect(() => {
+    setToDoList(loaderData.list);
+  }, [loaderData.list]);
+  
   return (
     <Paper>
       <Typography>todos: </Typography>
       {loaderData
-        ? loaderData.list.map((todo, i) => {
+        ? toDoList.map((todo, i) => {
             return <ToDo key={i} {...todo} />;
           })
         : ""}
-
     </Paper>
   );
 };
