@@ -3,7 +3,7 @@ import { useState } from "react";
 
 //router
 import { Link, Outlet } from "react-router-dom";
-//import { CookiesProvider } from "react-cookie";
+
 //components
 import { ToDoList } from "../ToDoList";
 
@@ -26,7 +26,6 @@ const drawerWidth = 240;
 
 const ResponsiveDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
