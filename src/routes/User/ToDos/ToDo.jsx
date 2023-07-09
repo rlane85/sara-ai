@@ -1,6 +1,11 @@
 //react imports
 import { useState } from "react";
 
+//router
+import { useSubmit } from "react-router-dom";
+
+//fetcher
+import { modifyToDo } from "../../controllers/modifyToDo";
 //material componenets
 import {
   Box,
@@ -28,33 +33,69 @@ export const ToDo = ({
   activitylistId,
 }) => {
   const [editing, setEditing] = useState(false);
-  const [toDoDescription, setToDoDescription] = useState(description);
+  // const [toDoDescription, setToDoDescription] = useState(description);
   const [completed, setCompleted] = useState(false);
   const [toDoPriority, setToDoPriority] = useState(priority);
 
-  const Icon = editing ? (
-    <SaveAltIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-  ) : (
-    <EditIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-  );
+
+  const submit = useSubmit();
+
+  const handleSave = (savedDescription) => {
+    // console.log("insert server request here(", savedDescription);
+  };
+
+  //removing this for now
+  // const Icon = editing ? (
+  //   <SaveAltIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+  // ) : (
+  //   <EditIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+  // );
+
+  const handleSubmit = (descriptionText, newPriority) => {
+    submit(
+      new URLSearchParams({ description: description, priority: newPriority }),
+      { method: "PUT" }
+    );
+  };
+
+  const Icon = null;
 
   const textFieldSx = {
-    textDecoration: completed ? "line-through" : "none",
+    textDecoration: status === "done" ? "line-through" : "none",
     input: { cursor: editing ? "text" : "default" },
   };
 
   const statusMap = {
     todo: "warning",
     inprogress: "success",
-    complete: "secondary",
   };
 
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
+      <Slider
+        sx={{ width: "80%" }}
+        size="small"
+        value={toDoPriority}
+        aria-labelledby="priority"
+        name="priority"
+        id="priority"
+        step={1}
+        min={0}
+        max={10}
+        onChange={(event) => {
+          setToDoPriority(event.target.value);
+        }}
+        onChangeCommitted={(event) => {
+          handleSubmit(description, toDoPriority);
+        }}
+      />
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <IconButton
-          aria-label="edit-todo"
+          aria-label="edit-todo-description"
+          type={editing ? "button" : "submit"}
+          name="description"
           onClick={() => {
+            // if (editing) handleSave(toDoDescription);
             setEditing(!editing);
           }}
         >
@@ -64,33 +105,17 @@ export const ToDo = ({
           sx={{ ...textFieldSx }}
           focused={!editing}
           color={statusMap[status]}
-          variant="standard"
-          id="description"
-          value={toDoDescription}
+          variant="outlined"
+          name="description"
+          value={description}
           onChange={(event) => {
-            if (editing) setToDoDescription(event.target.value);
-            else return null;
+            // if (editing) setToDoDescription(event.target.value);
+            // else return null;
           }}
-          onClick={() => setCompleted(!completed)}
+          // going to use for status=done
+          // onClick={() => setCompleted(!completed)}
         />
-
       </Box>
-      <Slider
-          sx={{width: "80%"}}
-          size="small"
-          value={toDoPriority}
-          aria-labelledby="priority"
-          step={1}
-          min={0}
-          max={10}
-          onChange={(event) => {
-            setToDoPriority(event.target.value);
-          }}
-          onChangeCommitted={(event) => {
-            console.log("insert send to server function here(", toDoPriority);
-            alert("sure thing! we'll set this ToDo's priority to " + toDoPriority)
-          }}
-        />
     </Box>
   );
 };

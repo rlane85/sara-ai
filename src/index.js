@@ -23,6 +23,7 @@ import {
 import {
   ListToDos,
   loader as listToDosLoader,
+  action as modifyToDoAction,
 } from "./routes/User/ToDos/ListToDos";
 import { Version } from "./routes/Version";
 
@@ -64,6 +65,7 @@ const routes = [
             path: "listtodos",
             element: <ListToDos />,
             loader: listToDosLoader,
+            action: modifyToDoAction
           },
           {
             path: "signout",
