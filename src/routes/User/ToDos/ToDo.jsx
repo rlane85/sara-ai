@@ -4,28 +4,15 @@ import { useState } from "react";
 //router
 import { useSubmit } from "react-router-dom";
 
-//fetcher
-import { modifyToDo } from "../../controllers/modifyToDo";
-
 //material componenets
-import {
-  Box,
-  InputAdornment,
-  Input,
-  InputLabel,
-  TextField,
-  Typography,
-  IconButton,
-  Slider,
-  Divider,
-} from "@mui/material";
+import { Box, TextField, IconButton, Slider, Divider } from "@mui/material";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
 //material icons
-import EditIcon from "@mui/icons-material/Edit";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
+// import EditIcon from "@mui/icons-material/Edit";
+// import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export const ToDo = ({
@@ -39,7 +26,6 @@ export const ToDo = ({
   activitylistId,
 }) => {
   const [editing, setEditing] = useState(false);
-  const [completed, setCompleted] = useState(false);
   const [toDoPriority, setToDoPriority] = useState(priority);
   const [dueDate, setDueDate] = useState(dayjs(duedate));
   const [chosenDate, setChosenDate] = useState(dueDate);
@@ -80,11 +66,6 @@ export const ToDo = ({
     todo: "warning",
     inprogress: "secondary",
     done: "success",
-  };
-
-  const statusBoolMap = {
-    todo: true,
-    inprogress: false,
   };
 
   return (
