@@ -5,19 +5,14 @@ export async function modifyToDo(
 ) {
   const uri = `/api/todo?`;
   const serverRoot = process.env.REACT_APP_SERVER_ROOT;
+  const newValues = new URLSearchParams({description, ...value})
   const url =
     serverRoot +
     uri +
-    new URLSearchParams({
-      description: description,
-      value
-    }).toString();
+    newValues.toString();
 
   return fetch(url, {
     method: modifyType,
-    headers: {
-      "Content-Type": "application/json",
-    },
     credentials: "include",
   })
     .then((response) => response.json())

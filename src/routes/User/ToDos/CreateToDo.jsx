@@ -1,5 +1,5 @@
 //router
-import { Form, useActionData } from "react-router-dom";
+import { Form, useActionData, redirect } from "react-router-dom";
 
 //material components
 import { InputBase, IconButton, Divider, Typography } from "@mui/material";
@@ -17,8 +17,7 @@ export async function action({ request, params }) {
   let duedate = formData.get("duedate");
   const response = await createToDo(description, priority, duedate);
 
-  if (response) return response;
-  else return null;
+  return redirect("/listtodos")
 }
 
 export const CreateToDo = () => {
