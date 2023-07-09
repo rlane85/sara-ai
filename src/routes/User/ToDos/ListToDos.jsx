@@ -7,6 +7,10 @@ import { useLoaderData } from "react-router-dom";
 //material components
 import { Paper, Typography, Divider } from "@mui/material";
 
+//datetime components
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
 //components
 import { ToDo } from "./ToDo";
 
@@ -29,13 +33,12 @@ export async function action({ request, params }) {
   const priority = formData.get("priority");
   const duedate = formData.get("duedate");
   const status = formData.get("status");
-  const response = await modifyToDo(
-    modifyType,
-    description,
+  const value = {
     priority,
     duedate,
-    status
-  );
+    status,
+  };
+  const response = await modifyToDo(modifyType, description, value);
   // console.log(priority);
   if (response) return response;
   else return null;
@@ -57,9 +60,8 @@ export const ListToDos = () => {
   });
 
   return (
-    <Paper>
-      <Typography>todos: </Typography>
-      {loaderData ? ToDoList : ""}
-    </Paper>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Paper>{loaderData ? ToDoList : ""}</Paper>
+    </LocalizationProvider>
   );
 };
