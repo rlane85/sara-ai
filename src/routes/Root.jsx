@@ -20,7 +20,6 @@ import {
 
 //material icons
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
 const drawerWidth = 240;
@@ -86,6 +85,12 @@ const ResponsiveDrawer = () => {
             </Link>
             <Link to="/deleteactivitylist">
               <Typography>Delete Activity List</Typography>
+            </Link>
+            <Link to="/createtodo">
+              <Typography>Create To-Do</Typography>
+            </Link>
+            <Link to="/listtodos">
+              <Typography>List ToDos</Typography>
             </Link>
           </Box>
 

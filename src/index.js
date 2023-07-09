@@ -14,9 +14,25 @@ import App from "./App";
 import { Login, action as loginAction } from "./routes/Login";
 import { Signup, action as signupAction } from "./routes/Signup";
 import { Roles, loader as rolesLoader } from "./routes/User/Roles";
-import { CreateActivityList, loader as createActivityListLoader } from "./routes/User/CreateActivityList";
-import { DeleteActivityList, loader as deleteActivityListLoader } from "./routes/User/DeleteActivityList";
+import {
+  CreateActivityList,
+  loader as createActivityListLoader,
+} from "./routes/User/CreateActivityList";
+import {
+  DeleteActivityList,
+  loader as deleteActivityListLoader,
+} from "./routes/User/DeleteActivityList";
 import { Signout, loader as signoutLoader } from "./routes/User/Signout";
+import {
+  CreateToDo,
+  action as createToDoAction,
+} from "./routes/User/ToDos/CreateToDo";
+
+import {
+  ListToDos,
+  loader as listToDosLoader,
+} from "./routes/User/ToDos/ListToDos";
+
 import { Version } from "./routes/Version";
 
 //router
@@ -55,6 +71,16 @@ const routes = [
             path: "deleteactivitylist",
             element: <DeleteActivityList />,
             loader: deleteActivityListLoader,
+          },
+          {
+            path: "createtodo",
+            element: <CreateToDo />,
+            action: createToDoAction,
+          },
+          {
+            path: "listtodos",
+            element: <ListToDos />,
+            loader: listToDosLoader,
           },
           {
             path: "signout",
