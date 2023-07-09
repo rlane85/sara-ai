@@ -80,12 +80,6 @@ const ResponsiveDrawer = () => {
             <Link to="/roles">
               <Typography>Roles</Typography>
             </Link>
-            <Link to="/createactivitylist">
-              <Typography>Create Activity List</Typography>
-            </Link>
-            <Link to="/deleteactivitylist">
-              <Typography>Delete Activity List</Typography>
-            </Link>
             <Link to="/createtodo">
               <Typography>Create To-Do</Typography>
             </Link>
