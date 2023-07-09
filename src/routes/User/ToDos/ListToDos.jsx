@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 //material components
-import { Paper, Typography, Divider } from "@mui/material";
+import { Paper, } from "@mui/material";
 
 //datetime components
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -28,7 +28,6 @@ export async function loader({ request, params }) {
 export async function action({ request, params }) {
   const modifyType = request.method;
   const formData = await request.formData();
-  const method = formData.get("method");
   const description = formData.get("description");
   const priority = formData.get("priority");
   const duedate = formData.get("duedate");
