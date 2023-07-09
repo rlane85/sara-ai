@@ -10,9 +10,8 @@ import {
   TextField,
   Typography,
   IconButton,
+  Slider,
 } from "@mui/material";
-
-import { useTheme } from "@mui/material/styles";
 
 //material icons
 import EditIcon from "@mui/icons-material/Edit";
@@ -28,11 +27,10 @@ export const ToDo = ({
   updatedAt,
   activitylistId,
 }) => {
-  const theme = useTheme();
-
   const [editing, setEditing] = useState(false);
   const [toDoDescription, setToDoDescription] = useState(description);
   const [completed, setCompleted] = useState(false);
+  const [toDoPriority, setToDoPriority] = useState(priority);
 
   const Icon = editing ? (
     <SaveAltIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
@@ -48,8 +46,8 @@ export const ToDo = ({
   const statusMap = {
     todo: "warning",
     inprogress: "success",
-    complete: "secondary"
-  }
+    complete: "secondary",
+  };
 
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
@@ -75,9 +73,24 @@ export const ToDo = ({
           }}
           onClick={() => setCompleted(!completed)}
         />
+
       </Box>
-      {status}
-      {priority}
+      <Slider
+          sx={{width: "80%"}}
+          size="small"
+          value={toDoPriority}
+          aria-labelledby="priority"
+          step={1}
+          min={0}
+          max={10}
+          onChange={(event) => {
+            setToDoPriority(event.target.value);
+          }}
+          onChangeCommitted={(event) => {
+            console.log("insert send to server function here(", toDoPriority);
+            alert("sure thing! we'll set this ToDo's priority to " + toDoPriority)
+          }}
+        />
     </Box>
   );
 };
