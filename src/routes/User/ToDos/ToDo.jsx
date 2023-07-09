@@ -97,10 +97,8 @@ export const ToDo = ({
               switch (status) {
                 case "todo":
                   return "done";
-                  break;
                 default:
                   return "todo";
-                  break;
               }
             };
             handleSubmitModify(description, {
