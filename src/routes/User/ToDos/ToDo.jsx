@@ -21,6 +21,7 @@ import {
 //material icons
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export const ToDo = ({
   id,
@@ -37,12 +38,7 @@ export const ToDo = ({
   const [completed, setCompleted] = useState(false);
   const [toDoPriority, setToDoPriority] = useState(priority);
 
-
   const submit = useSubmit();
-
-  const handleSave = (savedDescription) => {
-    // console.log("insert server request here(", savedDescription);
-  };
 
   //removing this for now
   // const Icon = editing ? (
@@ -51,11 +47,20 @@ export const ToDo = ({
   //   <EditIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
   // );
 
-  const handleSubmit = (descriptionText, newPriority) => {
+  const handleSubmitModify = (descriptionText, newPriorityObject) => {
     submit(
-      new URLSearchParams({ description: description, priority: newPriority }),
+      new URLSearchParams({
+        description: descriptionText,
+        ...newPriorityObject,
+      }),
       { method: "PUT" }
     );
+  };
+
+  const handleSubmitDelete = (descriptionText) => {
+    submit(new URLSearchParams({ description: descriptionText }), {
+      method: "DELETE",
+    });
   };
 
   const Icon = null;
@@ -86,7 +91,7 @@ export const ToDo = ({
           setToDoPriority(event.target.value);
         }}
         onChangeCommitted={(event) => {
-          handleSubmit(description, toDoPriority);
+          handleSubmitModify(description, { priority: toDoPriority });
         }}
       />
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -95,7 +100,6 @@ export const ToDo = ({
           type={editing ? "button" : "submit"}
           name="description"
           onClick={() => {
-            // if (editing) handleSave(toDoDescription);
             setEditing(!editing);
           }}
         >
@@ -115,6 +119,14 @@ export const ToDo = ({
           // going to use for status=done
           // onClick={() => setCompleted(!completed)}
         />
+        <IconButton
+          aria-label="delete-todo-description"
+          onClick={() => {
+            handleSubmitDelete(description);
+          }}
+        >
+          <DeleteForeverIcon />
+        </IconButton>
       </Box>
     </Box>
   );

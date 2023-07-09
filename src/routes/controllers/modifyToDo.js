@@ -1,16 +1,20 @@
-export async function modifyToDo(description, priority, duedate, status) {
-//   console.log(description);
-//   console.log(priority)
-//   console.log("anything")
+export async function modifyToDo(
+  modifyType,
+  description,
+  value
+) {
   const uri = `/api/todo?`;
   const serverRoot = process.env.REACT_APP_SERVER_ROOT;
   const url =
     serverRoot +
     uri +
-    new URLSearchParams({ description: description, priority: priority }).toString();
+    new URLSearchParams({
+      description: description,
+      value
+    }).toString();
 
   return fetch(url, {
-    method: "PUT",
+    method: modifyType,
     headers: {
       "Content-Type": "application/json",
     },

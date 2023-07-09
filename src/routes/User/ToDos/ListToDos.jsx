@@ -22,12 +22,20 @@ export async function loader({ request, params }) {
 }
 
 export async function action({ request, params }) {
-  let formData = await request.formData();
+  const modifyType = request.method;
+  const formData = await request.formData();
+  const method = formData.get("method");
   const description = formData.get("description");
   const priority = formData.get("priority");
   const duedate = formData.get("duedate");
   const status = formData.get("status");
-  const response = await modifyToDo(description, priority, duedate, status);
+  const response = await modifyToDo(
+    modifyType,
+    description,
+    priority,
+    duedate,
+    status
+  );
   // console.log(priority);
   if (response) return response;
   else return null;
@@ -36,7 +44,6 @@ export async function action({ request, params }) {
 export const ListToDos = () => {
   const loaderData = useLoaderData();
   const [toDoList, setToDoList] = useState(loaderData.list);
-  
 
   useEffect(() => {
     //I think this may be causing an echo with useLoaderData() because every time a modify todo form is submited, it is re-requesting the list from get /todo
@@ -52,7 +59,7 @@ export const ListToDos = () => {
   return (
     <Paper>
       <Typography>todos: </Typography>
-      {loaderData ? ToDoList  : ""}
+      {loaderData ? ToDoList : ""}
     </Paper>
   );
 };
