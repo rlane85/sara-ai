@@ -35,26 +35,22 @@ const drawerWidth = 240;
 
 const ResponsiveDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  
+
   const loaderData = useLoaderData();
-  const [user, setUser] = useState(loaderData.username ? loaderData.username : null);
+  const [user, setUser] = useState(
+    loaderData.username ? loaderData.username : null
+  );
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   useEffect(() => {
-    setUser(loaderData.username)
+    setUser(loaderData.username);
   }, [loaderData.username]);
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <ToDoList />
-    </div>
-  );
 
-  const UserLink = user ? (
+
+  const UserLinks = user ? (
     <Box>
       <Link to="/roles">
         <Typography>{user}</Typography>
@@ -78,6 +74,13 @@ const ResponsiveDrawer = () => {
         <Typography>Sign Up</Typography>
       </Link>
     </Box>
+  );
+  const drawer = (
+    <div>
+      <Toolbar />
+      <Divider />
+      {UserLinks}
+    </div>
   );
 
   return (
@@ -105,9 +108,6 @@ const ResponsiveDrawer = () => {
               Sara AI
             </Typography>
           </Link>
-          <Box sx={{ marginLeft: "auto", display: "flex" }}></Box>
-          {UserLink}
-
           <IconButton
             color="inherit"
             aria-label="version"
