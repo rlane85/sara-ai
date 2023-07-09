@@ -2,7 +2,10 @@
 import { useLoaderData } from "react-router-dom";
 
 //material components
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography, Divider } from "@mui/material";
+
+//components
+import { ToDo } from "./ToDo";
 
 //fetcher
 import { listToDos } from "../../controllers/listToDos";
@@ -19,15 +22,13 @@ export const ListToDos = () => {
 
   return (
     <Paper>
-      <Typography>user: {loaderData ? loaderData.username : ""}</Typography>
-      <Typography>
-        todos:{" "}
-        {loaderData
-          ? loaderData.list.map((todo, i) => {
-              return JSON.stringify(todo) + ", ";
-            })
-          : ""}
-      </Typography>
+      <Typography>todos: </Typography>
+      {loaderData
+        ? loaderData.list.map((todo, i) => {
+            return <ToDo key={i} {...todo} />;
+          })
+        : ""}
+
     </Paper>
   );
 };
