@@ -1,8 +1,8 @@
 //react imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //router
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 
 //components
 import { ToDoList } from "../ToDoList";
@@ -22,13 +22,29 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
+//fetcher
+import { roles } from "./controllers/roles";
+
+export async function loader({ request, params }) {
+  const response = await roles();
+  // console.log(response);
+  if (response) return response;
+  else return null;
+}
 const drawerWidth = 240;
 
 const ResponsiveDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  const loaderData = useLoaderData();
+  const [user, setUser] = useState(loaderData.username ? loaderData.username : null);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    setUser(loaderData.username)
+  }, [loaderData.username]);
 
   const drawer = (
     <div>
@@ -36,6 +52,32 @@ const ResponsiveDrawer = () => {
       <Divider />
       <ToDoList />
     </div>
+  );
+
+  const UserLink = user ? (
+    <Box>
+      <Link to="/roles">
+        <Typography>{user}</Typography>
+      </Link>
+      <Link to="/signout">
+        <Typography>Sign Out</Typography>
+      </Link>
+      <Link to="/createtodo">
+        <Typography>Create To-Do</Typography>
+      </Link>
+      <Link to="/listtodos">
+        <Typography>List ToDos</Typography>
+      </Link>
+    </Box>
+  ) : (
+    <Box>
+      <Link to="/login">
+        <Typography>Login</Typography>
+      </Link>
+      <Link to="/signup">
+        <Typography>Sign Up</Typography>
+      </Link>
+    </Box>
   );
 
   return (
@@ -63,29 +105,8 @@ const ResponsiveDrawer = () => {
               Sara AI
             </Typography>
           </Link>
-          <Box sx={{ marginLeft: "auto", display: "flex" }}>
-            <Link to="/login">
-              <Typography>Login</Typography>
-            </Link>
-
-            <Link to="/signup">
-              <Typography>Sign Up</Typography>
-            </Link>
-
-            <Link to="/signout">
-              <Typography>Sign Out</Typography>
-            </Link>
-
-            <Link to="/roles">
-              <Typography>Roles</Typography>
-            </Link>
-            <Link to="/createtodo">
-              <Typography>Create To-Do</Typography>
-            </Link>
-            <Link to="/listtodos">
-              <Typography>List ToDos</Typography>
-            </Link>
-          </Box>
+          <Box sx={{ marginLeft: "auto", display: "flex" }}></Box>
+          {UserLink}
 
           <IconButton
             color="inherit"

@@ -1,5 +1,5 @@
 //router
-import { Form, useActionData } from 'react-router-dom'
+import { Form, useActionData, redirect } from 'react-router-dom'
 
 //material components
 import {
@@ -23,7 +23,7 @@ export async function action ({ request, params }) {
   const response = await login(user, pass)
 
   // console.log(response);
-  if (response.msg) return response.msg
+  if (response.msg) return redirect("/")
   else return null
 }
 

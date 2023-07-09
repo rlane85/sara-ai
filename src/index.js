@@ -9,7 +9,7 @@ import "./index.css";
 //components
 import App from "./App";
 import ErrorPage from "./ErrorPage";
-import { ResponsiveDrawer } from "./routes/NavHeader";
+import { ResponsiveDrawer, loader as authLoader } from "./routes/NavHeader";
 
 //route components
 import { Login, action as loginAction } from "./routes/Login";
@@ -34,6 +34,7 @@ const routes = [
     path: "/",
     element: <ResponsiveDrawer />,
     errorElement: <ErrorPage />,
+    loader: authLoader,
     children: [
       {
         errorElement: <ErrorPage />,

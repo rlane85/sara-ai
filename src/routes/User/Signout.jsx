@@ -7,7 +7,7 @@ import { signout } from "../controllers/signout";
 export async function loader({ request, params }) {
   const response = await signout();
   // console.log(response);
-  if (response) return redirect("/login");
+  if (response) return redirect("/");
   else return null;
 }
 
