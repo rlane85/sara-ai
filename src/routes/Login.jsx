@@ -21,14 +21,12 @@ export async function action ({ request, params }) {
   let user = formData.get('user')
   let pass = formData.get('pass')
   const response = await login(user, pass)
-
   // console.log(response);
-  if (response.msg) return redirect("/")
+  if (response.msg) return redirect("/roles")
   else return null
 }
 
 export const Login = () => {
-  const actionData = useActionData()
 
   return (
     <Form method='post' id='login'>
@@ -59,7 +57,6 @@ export const Login = () => {
           <SendIcon />
         </IconButton>
       </Paper>
-      <Typography>Response: {actionData ? actionData : 'none yet'}</Typography>
     </Form>
   )
 }
