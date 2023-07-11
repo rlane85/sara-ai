@@ -5,7 +5,6 @@ import { Form, useActionData } from "react-router-dom";
 import {
   InputBase,
   IconButton,
-  Paper,
   Divider,
   Typography,
 } from "@mui/material";
