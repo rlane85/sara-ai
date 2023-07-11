@@ -15,8 +15,7 @@ export async function action({ request, params }) {
   let description = formData.get("description");
   let priority = formData.get("priority");
   let duedate = formData.get("duedate");
-  const response = await createToDo(description, priority, duedate);
-
+  await createToDo(description, priority, duedate);
   return redirect("/listtodos")
 }
 
