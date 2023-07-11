@@ -47,8 +47,6 @@ const ResponsiveDrawer = () => {
     setUser(loaderData.username);
   }, [loaderData.username]);
 
-
-
   const UserLinks = user ? (
     <Box>
       <Link to="/roles">
