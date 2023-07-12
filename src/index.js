@@ -11,6 +11,9 @@ import App from "./App";
 import ErrorPage from "./ErrorPage";
 import { ResponsiveDrawer, loader as authLoader } from "./routes/NavHeader";
 
+//websocket imports
+import { wsClient } from "./routes/controllers/wsClient";
+
 //route components
 import { Login, action as loginAction } from "./routes/Login";
 import { Signup, action as signupAction } from "./routes/Signup";
@@ -29,58 +32,53 @@ import { Version } from "./routes/Version";
 
 //router
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 const routes = [
   {
     path: "/",
-    element: <ResponsiveDrawer />,
     errorElement: <ErrorPage />,
+    element: <ResponsiveDrawer wsClient={wsClient} />,
     loader: authLoader,
+    path: "/",
     children: [
       {
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            path: "signup",
-            element: <Signup />,
-            action: signupAction,
-          },
-          {
-            path: "login",
-            element: <Login />,
-            action: loginAction,
-          },
-          {
-            path: "roles",
-            element: <Roles />,
-            loader: rolesLoader,
-          },
+        path: "signup",
+        element: <Signup />,
+        action: signupAction,
+      },
+      {
+        path: "login",
+        element: <Login />,
+        action: loginAction,
+      },
+      {
+        path: "roles",
+        element: <Roles />,
+        loader: rolesLoader,
+      },
 
-          {
-            path: "createtodo",
-            element: <CreateToDo />,
-            action: createToDoAction,
-          },
-          {
-            path: "listtodos",
-            element: <ListToDos />,
-            loader: listToDosLoader,
-            action: modifyToDoAction
-          },
-          {
-            path: "signout",
-            element: <Signout />,
-            loader: signoutLoader,
-          },
-          {
-            path: "version",
-            element: <Version />,
-          },
-          {
-            index: true,
-            element: <App />,
-          },
-        ],
+      {
+        path: "createtodo",
+        element: <CreateToDo />,
+        action: createToDoAction,
+      },
+      {
+        path: "listtodos",
+        element: <ListToDos />,
+        loader: listToDosLoader,
+        action: modifyToDoAction,
+      },
+      {
+        path: "signout",
+        element: <Signout />,
+        loader: signoutLoader,
+      },
+      {
+        path: "version",
+        element: <Version />,
+      },
+      {
+        index: true,
+        element: <App />,
       },
     ],
   },

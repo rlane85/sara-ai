@@ -4,12 +4,4 @@ export async function listToDos() {
   return fetch(url, { 
     credentials: "include",
    })
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((e) => {
-      console.log(e);
-      return e;
-    });
 }

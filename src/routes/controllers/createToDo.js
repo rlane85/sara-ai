@@ -16,12 +16,4 @@ export async function createToDo(description, priority, duedate) {
     credentials: "include",
     body: JSON.stringify(reqBody),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((e) => {
-      console.log(e);
-      return e;
-    });
 }

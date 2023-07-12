@@ -32,20 +32,27 @@ export async function loader({ request, params }) {
 }
 const drawerWidth = 240;
 
-const ResponsiveDrawer = () => {
+const ResponsiveDrawer = ({ wsClient }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const loaderData = useLoaderData();
-  const [user, setUser] = useState(
-    loaderData.username ? loaderData.username : null
-  );
+  const [user, setUser] = useState(loaderData ? loaderData.username : null);
+
+  const [connected, setConnected] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   useEffect(() => {
     setUser(loaderData.username);
-  }, [loaderData.username]);
+  }, [loaderData]);
+  useEffect(() => {
+    const rootWsConnection = wsClient();
+    rootWsConnection.onopen = () => console.log("open");
+    rootWsConnection.onmessage = (msg) => {
+      console.log(msg.data);
+    };
+  }, []);
 
   const UserLinks = user ? (
     <Box>
