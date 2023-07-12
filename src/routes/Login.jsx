@@ -1,5 +1,5 @@
 //router
-import { Form, useActionData, redirect } from 'react-router-dom'
+import { Form, redirect } from 'react-router-dom'
 
 //material components
 import {
@@ -21,6 +21,7 @@ export async function action ({ request, params }) {
   let user = formData.get('user')
   let pass = formData.get('pass')
   const response = await login(user, pass)
+
   // console.log(response);
   if (response.msg) return redirect("/roles")
   else return null
