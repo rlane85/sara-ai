@@ -46,13 +46,15 @@ const ResponsiveDrawer = ({ wsClient }) => {
   useEffect(() => {
     setUser(loaderData.username);
   }, [loaderData]);
-  useEffect(() => {
-    const rootWsConnection = wsClient();
-    rootWsConnection.onopen = () => console.log("open");
-    rootWsConnection.onmessage = (msg) => {
-      console.log(msg.data);
-    };
-  }, []);
+
+  //I'm taking this out for now because we don't need a top level connection when there is only working endpoint/route
+  // useEffect(() => {
+  //   const rootWsConnection = wsClient();
+  //   rootWsConnection.onopen = () => console.log("open");
+  //   rootWsConnection.onmessage = (msg) => {
+  //     console.log(msg.data);
+  //   };
+  // }, []);
 
   const UserLinks = user ? (
     <Box>
