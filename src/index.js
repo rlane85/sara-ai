@@ -63,7 +63,7 @@ const routes = [
       },
       {
         path: "listtodos",
-        element: <ListToDos />,
+        element: <ListToDos wsClient={wsClient} />,
         loader: listToDosLoader,
         action: modifyToDoAction,
       },

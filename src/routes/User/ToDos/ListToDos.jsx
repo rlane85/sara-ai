@@ -2,10 +2,9 @@
 import { useState, useEffect } from "react";
 
 //router
-import { useLoaderData } from "react-router-dom";
 
 //material components
-import { Paper, } from "@mui/material";
+import { Paper } from "@mui/material";
 
 //datetime components
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -43,25 +42,41 @@ export async function action({ request, params }) {
   else return null;
 }
 
-export const ListToDos = () => {
-  const loaderData = useLoaderData();
-  const [toDoList, setToDoList] = useState(loaderData.list);
+// https://stackoverflow.com/questions/9804777/how-to-test-if-a-string-is-json-or-not
+
+function isJson(item) {
+  let value = typeof item !== "string" ? JSON.stringify(item) : item;
+  try {
+    value = JSON.parse(value);
+  } catch (e) {
+    return false;
+  }
+
+  return typeof value === "object" && value !== null;
+}
+
+export const ListToDos = ({ wsClient }) => {
+  const [toDoList, setToDoList] = useState([]);
 
   useEffect(() => {
-    //I think this may be causing an echo with useLoaderData() because every time a modify todo form is submited, it is re-requesting the list from get /todo
-    //This shouldn't be necessary because the response from PUT /todo?change... contains the modified list of todos
-    //I'm going to leave it for now, because it'll all get refactored soon enough
-    setToDoList(loaderData.list);
-  }, [loaderData.list]);
+    const todosWsConnection = wsClient();
+    todosWsConnection.onopen = () => console.log("todo ws open");
+    todosWsConnection.onmessage = (msg) => {
+      console.log(msg);
+      if (isJson(msg.data)) {
+        const { data } = JSON.parse(msg.data);
+        setToDoList(data);
+      }
+    };
+  }, []);
 
-  const ToDoList = null
-  // toDoList.map((todo, i) => {
-  //   return <ToDo key={i} {...todo} />;
-  // });
+  const ToDoList = toDoList.map((todo, i) => {
+    return <ToDo key={i} {...todo} />;
+  });
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Paper>{loaderData ? ToDoList : ""}</Paper>
+      <Paper>{ToDoList}</Paper>
     </LocalizationProvider>
   );
 };
