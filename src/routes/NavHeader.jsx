@@ -1,5 +1,8 @@
 //react imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+//router
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 
 //components
 
@@ -14,22 +17,75 @@ import {
   Typography,
 } from "@mui/material";
 
+//material icons
 import MenuIcon from "@mui/icons-material/Menu";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
+//fetcher
+import { roles } from "./controllers/roles";
+
+export async function loader({ request, params }) {
+  const response = await roles();
+  // console.log(response);
+  if (response) return response;
+  else return null;
+}
 const drawerWidth = 240;
 
-const ResponsiveDrawer = ({ children, drawerContent }) => {
+const ResponsiveDrawer = ({ wsClient }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const loaderData = useLoaderData();
+  const [user, setUser] = useState(loaderData ? loaderData.username : null);
+
+  const [connected, setConnected] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  useEffect(() => {
+    setUser(loaderData.username);
+  }, [loaderData]);
+
+  //I'm taking this out for now because we don't need a top level connection when there is only working endpoint/route
+  // useEffect(() => {
+  //   const rootWsConnection = wsClient();
+  //   rootWsConnection.onopen = () => console.log("open");
+  //   rootWsConnection.onmessage = (msg) => {
+  //     console.log(msg.data);
+  //   };
+  // }, []);
+
+  const UserLinks = user ? (
+    <Box>
+      <Link to="/roles">
+        <Typography>{user}</Typography>
+      </Link>
+      <Link to="/signout">
+        <Typography>Sign Out</Typography>
+      </Link>
+      <Link to="/createtodo">
+        <Typography>Create To-Do</Typography>
+      </Link>
+      <Link to="/listtodos">
+        <Typography>List ToDos</Typography>
+      </Link>
+    </Box>
+  ) : (
+    <Box>
+      <Link to="/login">
+        <Typography>Login</Typography>
+      </Link>
+      <Link to="/signup">
+        <Typography>Sign Up</Typography>
+      </Link>
+    </Box>
+  );
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
-      {drawerContent}
+      {UserLinks}
     </div>
   );
 
@@ -52,9 +108,23 @@ const ResponsiveDrawer = ({ children, drawerContent }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Sara AI
-          </Typography>
+
+          <Link to={"/"}>
+            <Typography variant="h6" noWrap component="div">
+              Sara AI
+            </Typography>
+          </Link>
+          <IconButton
+            color="inherit"
+            aria-label="version"
+            edge="start"
+            onClick={null}
+            sx={{ marginLeft: "auto" }}
+          >
+            <Link to="/version">
+              <TextSnippetIcon />
+            </Link>
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box
@@ -104,7 +174,7 @@ const ResponsiveDrawer = ({ children, drawerContent }) => {
         }}
       >
         <Toolbar />
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );

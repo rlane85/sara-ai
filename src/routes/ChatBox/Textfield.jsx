@@ -1,4 +1,6 @@
 import React from "react";
+
+//material components
 import { InputBase, IconButton, Paper, Divider } from "@mui/material";
 
 import SendIcon from "@mui/icons-material/Send";

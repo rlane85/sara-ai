@@ -1,13 +1,96 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+//react imports
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+//style
+import "./index.css";
+
+//components
+import App from "./App";
+import ErrorPage from "./ErrorPage";
+import { ResponsiveDrawer, loader as authLoader } from "./routes/NavHeader";
+
+//websocket imports
+import { wsClient } from "./routes/controllers/wsClient";
+
+//route components
+import { Login, action as loginAction } from "./routes/Login";
+import { Signup, action as signupAction } from "./routes/Signup";
+import { Roles, loader as rolesLoader } from "./routes/User/Roles";
+import { Signout, loader as signoutLoader } from "./routes/User/Signout";
+import {
+  CreateToDo,
+  action as createToDoAction,
+} from "./routes/User/ToDos/CreateToDo";
+import {
+  ListToDos,
+  loader as listToDosLoader,
+  action as modifyToDoAction,
+} from "./routes/User/ToDos/ListToDos";
+import { Version } from "./routes/Version";
+
+//router
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+const routes = [
+  {
+    path: "/",
+    errorElement: <ErrorPage />,
+    element: <ResponsiveDrawer wsClient={wsClient} />,
+    loader: authLoader,
+    path: "/",
+    children: [
+      {
+        path: "signup",
+        element: <Signup />,
+        action: signupAction,
+      },
+      {
+        path: "login",
+        element: <Login />,
+        action: loginAction,
+      },
+      {
+        path: "roles",
+        element: <Roles />,
+        loader: rolesLoader,
+      },
+
+      {
+        path: "createtodo",
+        element: <CreateToDo />,
+        action: createToDoAction,
+      },
+      {
+        path: "listtodos",
+        element: <ListToDos wsClient={wsClient} />,
+        loader: listToDosLoader,
+        action: modifyToDoAction,
+      },
+      {
+        path: "signout",
+        element: <Signout />,
+        loader: signoutLoader,
+      },
+      {
+        path: "version",
+        element: <Version />,
+      },
+      {
+        index: true,
+        element: <App />,
+      },
+    ],
+  },
+];
+const router = createBrowserRouter(routes, {
+  basename: "/sara-ai",
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

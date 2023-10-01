@@ -1,17 +1,14 @@
 //react imports
 import { useEffect, useState, useRef } from "react";
 
-
 //styles
 
 import withSplashScreen from "./withSplashScreen";
 import CssBaseline from "@mui/material/CssBaseline";
 
 //components
-import { ChatBox } from "./ChatBox";
-import { ToDoList } from "./ToDoList";
+import { ChatBox } from "./routes/ChatBox";
 
-import { ResponsiveDrawer } from "./ResponsiveDrawer";
 import alanBtn from "@alan-ai/alan-sdk-web";
 
 function App() {
@@ -68,7 +65,6 @@ function App() {
       <CssBaseline />
       
       <div className="App">
-        <ResponsiveDrawer drawerContent={<ToDoList task={aiAddedTask} />}>
           <ChatBox
             saraReply={saraReply}
             userInput={parsed}
@@ -76,7 +72,6 @@ function App() {
             setTextMessage={setTextMessage}
             sendTextMessage={sendTextMessage}
           />
-        </ResponsiveDrawer>
       </div>
     </>
   );
